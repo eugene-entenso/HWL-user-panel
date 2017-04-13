@@ -4,7 +4,7 @@ import {LoginComponent} from './login/index';
 import {SignupComponent} from './signup/index';
 import {ConfirmComponent} from './confirm/index';
 import {LayoutComponent, LayoutAdminComponent} from './layout/index';
-import {HomeComponent} from './home/index';
+import {DashboardComponent} from './dashboard/index';
 import {UsersComponent} from './users/index';
 import {AuthGuard, AuthAdminGuard} from './guards/index';
 
@@ -17,7 +17,7 @@ const appRoutes: Routes = [
         component: LayoutComponent,
         canActivate: [AuthGuard],
         children: [
-            {path: 'home', component: HomeComponent},
+            {path: 'dashboard', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
         ]
     },
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
         component: LayoutAdminComponent,
         canActivate: [AuthAdminGuard],
         children: [
-            {path: 'home', component: HomeComponent},
+            {path: 'dashboard', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
         ]
     },

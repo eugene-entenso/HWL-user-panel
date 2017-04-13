@@ -1,64 +1,97 @@
 ﻿import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import {UtilService} from './index';
 
 @Injectable()
 export class AuthService {
-    public token: string;
+    public headers: Headers;
+    public menu: {};
+    public user: string;
+    public token: {};
 
     constructor(private http: Http, private util: UtilService) {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            this.token = currentUser && currentUser.token.access_token;
-        }
+        this.initUser();
     }
 
     login(username: string, password: string): Observable<boolean> {
-        let client_id = this.util.clientId;
-        let client_secret = this.util.clientSecret;
-        let grant_type = 'password';
-        let body = JSON.stringify({client_id, client_secret, grant_type, username, password});
-        return this.http.post(this.util.apiEndPoint + '/login', body, {headers: this.util.commonHeaders})
+        const client_id = this.util.clientId;
+        const client_secret = this.util.clientSecret;
+        const grant_type = 'password';
+        const body = JSON.stringify({client_id, client_secret, grant_type, username, password});
+        const options = new RequestOptions({headers: this.util.commonHeaders});
+
+        return this.http
+            .post(this.util.apiEndPoint + '/login', body, options)
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let token = response.json() && response.json().token;
-                if (token) {
-                    // set token property
-                    this.token = token.access_token;
-
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(response.json()));
-
-                    // return true to indicate successful login
-                    return true;
-                } else {
-                    // return false to indicate failed login
-                    return false;
-                }
+                return this.setUser(response.json());
             });
     }
 
     signup(name: string, email: string, password: string, password_repeat: string): Observable<boolean> {
-        let body = JSON.stringify({name, email, password, password_repeat});
-        return this.http.post(this.util.apiEndPoint + '/signup', body, {headers: this.util.commonHeaders})
+        const body = JSON.stringify({name, email, password, password_repeat});
+        const options = new RequestOptions({headers: this.util.commonHeaders});
+
+        return this.http
+            .post(this.util.apiEndPoint + '/signup', body, options)
             .map((response: Response) => {
                 return response.json();
             });
     }
 
     confirm(code: string): Observable<boolean> {
-        return this.http.get(this.util.apiEndPoint + '/confirm/' + code, {headers: this.util.commonHeaders})
+        const options = new RequestOptions({headers: this.util.commonHeaders});
+
+        return this.http
+            .get(this.util.apiEndPoint + '/confirm/' + code, options)
             .map((response: Response) => {
                 return response.json();
             });
     }
 
     logout(): void {
-        // clear token remove user from local storage to log user out
-        this.token = null;
+        this.unSetUser();
+    }
+
+    initUser(): boolean {
+        if (!this.isSetUser()) {
+            return false;
+        }
+        const user = this.getUser();
+        this.menu = user['menu'];
+        this.token = user['token'];
+        this.setAuthHeaders(user['token']['token_type'], user['token']['access_token']);
+        return true;
+    }
+
+    setUser(user: {}): boolean {
+        if (!user) {
+            return false;
+        }
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        return this.initUser();
+    }
+
+    getUser(): {} {
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
+    isSetUser(): boolean {
+        return !!localStorage.getItem('currentUser');
+    }
+
+    unSetUser(): void {
         localStorage.removeItem('currentUser');
+        this.token = null;
+        this.menu = null;
+        this.headers = null;
+    }
+
+    setAuthHeaders(token_type: string, access_token: string): void {
+        this.headers = new Headers();
+        this.headers.append('Authorization', token_type + ' ' + access_token);
     }
 
 }

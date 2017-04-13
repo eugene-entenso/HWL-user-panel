@@ -13,7 +13,7 @@ import {LoginComponent} from './login/index';
 import {SignupComponent} from './signup/index';
 import {ConfirmComponent} from './confirm/index';
 import {LayoutComponent, LayoutAdminComponent} from './layout/index';
-import {HomeComponent} from './home/index';
+import {DashboardComponent} from './dashboard/index';
 import {UsersComponent} from './users/index';
 
 @NgModule({
@@ -31,7 +31,7 @@ import {UsersComponent} from './users/index';
         ConfirmComponent,
         LayoutComponent,
         LayoutAdminComponent,
-        HomeComponent,
+        DashboardComponent,
         UsersComponent
     ],
     providers: [

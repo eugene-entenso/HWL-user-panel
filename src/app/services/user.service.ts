@@ -12,11 +12,10 @@ export class UserService {
     }
 
     getUsers(): Observable<User[]> {
-        // add authorization header with jwt token
-        let headers = new Headers({'Authorization': 'Bearer ' + this.auth.token});
-        let options = new RequestOptions({headers: headers});
+        const options = new RequestOptions({headers: Object.assign(this.util.commonHeaders, this.auth.headers)});
 
-        return this.http.get(this.util.apiEndPoint + '/v1/users', options)
+        return this.http
+            .get(this.util.apiEndPoint + '/v1/users', options)
             .map((response: Response) => response.json());
     }
 
