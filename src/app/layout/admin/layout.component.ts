@@ -1,5 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 
+import {AuthService} from '../../services/index';
+
 @Component({
     moduleId: module.id,
     templateUrl: 'layout.component.html',
@@ -8,18 +10,24 @@
 
 export class LayoutAdminComponent implements OnInit {
 
-    private menu = [
-        {'label': 'Dashboard', 'icon': 'fa-charts', 'route': '/admin/dashboard'},
-        {'label': 'Users', 'icon': 'fa-users', 'route': '/admin/users'},
-        {'label': 'Swagger', 'icon': 'fa-doc', 'href': '/swagger'},
-        {'label': 'PhpMyAdmin', 'icon': 'fa-database', 'href': '/phpmyadmin'},
-        {'label': 'Vesta', 'icon': 'fa-sun-o', 'href': window.location.protocol + '//' + window.location.hostname + ':8083'}
-    ];
+    public visibleMenu = true;
+    menu: {}[] = [];
+    tools: {}[] = [];
 
-    constructor() {
+    constructor(private auth: AuthService) {
     }
 
     ngOnInit() {
+        this.menu = this.auth.menu['common'];
+        this.tools = this.auth.menu['tools'];
+    }
+
+    issetTools(): boolean {
+        return this.tools.length > 0;
+    }
+
+    toggleMenu() {
+        this.visibleMenu = !this.visibleMenu;
     }
 
 }

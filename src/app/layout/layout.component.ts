@@ -10,7 +10,7 @@ import { UserService } from '../services/index';
 
 export class LayoutComponent implements OnInit {
 
-    constructor(private userService: UserService) { }
+    constructor(private user: UserService) { }
 
     ngOnInit() {
         // get users from secure api end point

@@ -31,7 +31,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: rgba(10, 10, 10, .9);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -66,7 +66,7 @@ body {
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 34px;
 }
 
 .sidebar-nav li a {
@@ -87,9 +87,14 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
+    height: 53px;
     font-size: 18px;
-    line-height: 60px;
+    line-height: 54px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255, 255, .15);
+    font-weight: 100;
+    letter-spacing: -.1px;
+    color: rgba(255,255, 255, .6);
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -127,4 +132,14 @@ body {
         position: relative;
         margin-right: 0;
     }
+}
+
+#sidebar-wrapper > ul > li > a > i {
+    margin-right: 8px;
+}
+
+#menu-toggle {
+    line-height: 50px;
+    font-size: 24px;
+    margin: 0 4px;
 }
