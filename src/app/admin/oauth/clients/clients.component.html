@@ -1,0 +1,29 @@
+﻿<h1>OAuth clients</h1>
+<div class="panel">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed responsive mb0" data-sortable="" data-sortable-initialized="true">
+                <thead>
+                <tr>
+                    <th>client_id</th>
+                    <th>client_secret</th>
+                    <th>redirect_uri</th>
+                    <th>grant_types</th>
+                    <th>scope</th>
+                    <th>user_id</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let client of clients">
+                    <th scope="row">{{client.client_id}}</th>
+                    <td>{{client.client_secret}}</td>
+                    <td>{{client.redirect_uri}}</td>
+                    <td>{{client.grant_types}}</td>
+                    <td>{{client.scope}}</td>
+                    <td>{{client.user_id}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

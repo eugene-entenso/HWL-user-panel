@@ -8,13 +8,14 @@ import {AppComponent}  from './app.component';
 import {routing}        from './app.routing';
 
 import {AuthGuard, AuthAdminGuard} from './guards/index';
-import {AuthService, UserService, UtilService} from './services/index';
+import {AuthService, UserService, UtilService, OAuthService} from './services/index';
 import {LoginComponent} from './login/index';
 import {SignupComponent} from './signup/index';
 import {ConfirmComponent} from './confirm/index';
 import {LayoutComponent, LayoutAdminComponent} from './layout/index';
 import {DashboardComponent} from './dashboard/index';
 import {UsersComponent} from './users/index';
+import {OAuthClientsComponent} from './admin/index';
 
 @NgModule({
     imports: [
@@ -22,7 +23,7 @@ import {UsersComponent} from './users/index';
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
     ],
     declarations: [
         AppComponent,
@@ -32,7 +33,8 @@ import {UsersComponent} from './users/index';
         LayoutComponent,
         LayoutAdminComponent,
         DashboardComponent,
-        UsersComponent
+        UsersComponent,
+        OAuthClientsComponent,
     ],
     providers: [
         AuthGuard,
@@ -40,6 +42,7 @@ import {UsersComponent} from './users/index';
         AuthService,
         UserService,
         UtilService,
+        OAuthService,
     ],
     bootstrap: [AppComponent]
 })

@@ -11,11 +11,10 @@ import { UserService } from '../services/index';
 export class UsersComponent implements OnInit {
     users: User[] = [];
 
-    constructor(private userService: UserService) { }
+    constructor(private user: UserService) { }
 
     ngOnInit() {
-        // get users from secure api end point
-        this.userService.getUsers()
+        this.user.getUsers()
             .subscribe(users => {
                 this.users = users;
             });

@@ -6,6 +6,7 @@ import {ConfirmComponent} from './confirm/index';
 import {LayoutComponent, LayoutAdminComponent} from './layout/index';
 import {DashboardComponent} from './dashboard/index';
 import {UsersComponent} from './users/index';
+import {OAuthClientsComponent} from './admin/index';
 import {AuthGuard, AuthAdminGuard} from './guards/index';
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
         children: [
             {path: 'dashboard', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
+            {path: 'oauth/clients', component: OAuthClientsComponent},
         ]
     },
 
