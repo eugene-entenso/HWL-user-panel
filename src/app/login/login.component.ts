@@ -28,14 +28,13 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 response => {
                     if (response === true) {
-                        let role = JSON.parse(localStorage.getItem('currentUser')).token.scope.role;
-                        switch (role) {
+                        switch (this.auth.token['scope'].role) {
                             case 'root':
                             case 'admin':
-                                this.router.navigate(['/admin/home']);
+                                this.router.navigate(['/admin/dashboard']);
                                 break;
                             case 'user':
-                                this.router.navigate(['/home']);
+                                this.router.navigate(['/dashboard']);
                                 break;
                         }
                     }
