@@ -1,0 +1,18 @@
+<div class="login-page">
+    <div class="form">
+        <div *ngIf="errors">
+            <div *ngFor="let error of errors" class="alert alert-danger">{{error}}</div>
+        </div>
+        <form class="register-form" role="form" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate>
+            <input type="text" name="name" [(ngModel)]="model.name" #name="ngModel" placeholder="name" required/>
+            <input type="text" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="email" required/>
+            <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="password" required/>
+            <input type="password" name="password_repeat" [(ngModel)]="model.password_repeat" #password_repeat="ngModel" placeholder="repeat password" required/>
+            <div class="form-group">
+                <button type="submit">Sign Up</button>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                <p class="message">Already registered? <a role="button" [routerLink]="['/login']">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
